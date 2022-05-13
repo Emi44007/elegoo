@@ -1,0 +1,48 @@
+#include <Smartcar.h>
+#include <Wire.h>
+
+Odometer encoderLeft, encoderRight;
+Gyroscope gyro;
+Car car;
+SR04 front;
+const int TRIGGER_PIN = 6; //D6
+const int ECHO_PIN = 7; //D7
+const int fSpeed = 200; //a PWM frequency for going forward
+const int bSpeed = -200; //a PWM frequency for going backward
+const int lDegrees = -75; //degrees to turn left
+const int rDegrees = 75; //degrees to turn right
+
+void setup() {
+  car.begin();
+  front.attach(TRIGGER_PIN, ECHO_PIN);
+}
+void handleInput() {} //handle serial input if there is any
+  if (front.getDistance()=<3) {
+    char input = (); //read one byte/character
+    switch (input) {
+      case 'l': //rotate counter-clockwise going forward
+        car.setSpeed(fSpeed);
+        car.setAngle(lDegrees);
+        break;
+      case 'r': //turn clock-wise
+        car.setSpeed(fSpeed);
+        car.setAngle(rDegrees);
+        break;
+      case 'f': //go ahead
+        car.setSpeed(fSpeed);
+        car.setAngle(0);
+        break;
+      case 'b': //go back
+        car.setSpeed(bSpeed);
+        car.setAngle(0);
+        break;
+      default: //if you receive something that you don't know, just stop
+        car.setSpeed(0);
+        car.setAngle(0);
+    }
+  }
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+  }
